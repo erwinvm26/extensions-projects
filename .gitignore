@@ -1,4 +1,8 @@
-### Projects
+### Projects 
 weather-extension/node_modules
 weather-extension/.env
 weather-extension/dist
+
+example-extension/node_modules
+example-extension/.env
+example-extension/dist
