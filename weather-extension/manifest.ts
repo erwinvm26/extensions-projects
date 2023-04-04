@@ -34,4 +34,5 @@ export const manifest: chrome.runtime.ManifestV3 = {
     type: "module",
     service_worker: "js/background.js",
   },
+  permissions: ["notifications", "tabs", "webNavigation", "storage"],
 };

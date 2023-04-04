@@ -2,12 +2,13 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 
-import config from "./src/config";
 import makeManifest from "./src/utils/make-manifest";
 import { manifest } from "./manifest";
 
-const isDev = config.VITE_ENV === "development";
-const isProd = config.VITE_ENV === "production";
+console.log(import.meta.env);
+
+const isDev = true;
+const isProd = false;
 
 // Directory
 const root = resolve(__dirname + "/src");
