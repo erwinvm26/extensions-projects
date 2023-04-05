@@ -28,42 +28,54 @@ function App() {
   } = useForm<Form>();
   const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
 
-  // useEffect(() => {
-  //   async () => {
-  //     const data = await getStorage<WeatherApiData[]>("data");
+  useEffect(() => {
+    const funWeather = async () => {
+      await getWeatherData();
+    };
 
-  //     setWeatherData(data);
-  //   };
-  // }, []);
+    funWeather();
+  }, []);
 
   const onSubmit: SubmitHandler<Form> = async ({ search }) => {
-    getCity({
-      q: search,
-    })
-      .then((d) => {
-        const data = [...weatherData, d];
+    try {
+      const city = await getCity({
+        q: search,
+      });
 
-        setWeatherData(data);
+      if (!city) {
+        throw new Error("City not found");
+      }
 
-        // setStorage(data);
-      })
-      .catch((error) => console.log(error));
+      const result = [...weatherData, city];
 
-    // const data = await getStorage<WeatherApiData[]>("data");
+      const store = await setStorage<WeatherApiData[]>({ data: result });
 
-    // console.log(data);
+      setWeatherData(store);
 
-    //
-
-    reset({
-      search: "",
-    });
+      reset({
+        search: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleDelete = (index: number) => {
+  const getWeatherData = async () => {
+    const result = await getStorage<WeatherApiData[]>("data");
+
+    const weatherData = result.data?.flat() || [];
+
+    setWeatherData(weatherData);
+  };
+
+  const handleDelete = async (index: number) => {
     weatherData.splice(index, 1);
 
-    setWeatherData([...weatherData]);
+    const store = await setStorage<WeatherApiData[]>({
+      data: [...weatherData],
+    });
+
+    setWeatherData(store);
   };
 
   return (
