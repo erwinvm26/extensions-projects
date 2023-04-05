@@ -1,6 +1,3 @@
-import { log } from "console";
-import { WeatherApiData } from "./interfaceq";
-
 interface Storage<T = any> {
   data?: T[];
   values?: T;
