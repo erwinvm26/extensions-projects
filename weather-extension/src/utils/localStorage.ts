@@ -17,7 +17,3 @@ export function setStorage<T = unknown>({ data }: Storage): Promise<T> {
 export function getStorage<T = unknown>(key: keyof Storage) {
   return chrome.storage.local.get([key]) as Storage<T>;
 }
-
-async function hola() {
-  const data = await getStorage<WeatherApiData[]>("data");
-}

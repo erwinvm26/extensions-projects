@@ -61,9 +61,9 @@ function App() {
   };
 
   const getWeatherData = async () => {
-    const result = await getStorage<WeatherApiData[]>("data");
+    const result = await getStorage<WeatherApiData>("data");
 
-    const weatherData = result.data?.flat() || [];
+    const weatherData = result.data || [];
 
     setWeatherData(weatherData);
   };
