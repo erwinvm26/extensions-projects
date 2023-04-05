@@ -1,13 +1,19 @@
+import { log } from "console";
 import { WeatherApiData } from "./interfaceq";
 
-interface Storage {
-  data: WeatherApiData[];
+interface Storage<T = any> {
+  data?: T[];
+  values?: T;
 }
 
-export const setStorage = ({ data }: Storage) => {
+export function setStorage({ data }: Storage) {
   chrome.storage.local.set({ data });
-};
+}
 
-export const getStorage = (key: string) => {
-  return chrome.storage.local.get([key]);
-};
+export function getStorage<T = unknown>(key: keyof Storage) {
+  return chrome.storage.local.get([key]) as T;
+}
+
+async function hola() {
+  const data = await getStorage<WeatherApiData[]>("data");
+}

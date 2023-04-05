@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import {
   Card,
   CardBody,
@@ -12,9 +13,10 @@ import { IoCloseOutline } from "react-icons/io5";
 interface WeatherCardProps {
   name: string;
   feelLike: number;
+  onDelete: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const WeatherCard = ({ name, feelLike }: WeatherCardProps) => {
+export const WeatherCard = ({ name, feelLike, onDelete }: WeatherCardProps) => {
   return (
     <Card mb="2" shadow="md" maxW="full">
       <CardBody>
@@ -32,6 +34,7 @@ export const WeatherCard = ({ name, feelLike }: WeatherCardProps) => {
             colorScheme="gray"
             aria-label="See menu"
             icon={<IoCloseOutline />}
+            onClick={onDelete}
           />
         </Flex>
       </CardBody>
