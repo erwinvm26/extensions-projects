@@ -6,25 +6,47 @@ interface City {
   q: string;
 }
 
+const baseURL = `${config.URL_API}?key=${config.API_KEY}&aqi=no`;
+
 const instance = axios.create({
-  baseURL: `${config.URL_API}?key=${config.API_KEY}&aqi=no`,
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
 export async function getCity({ q }: City) {
-  const city = await instance.get<WeatherApiData>("", {
-    params: {
-      q,
+  try {
+    const city = await instance.get<WeatherApiData>("", {
+      params: {
+        q,
+      },
+    });
+
+    console.log(city);
+
+    if (!city) {
+      throw new Error("City not found");
+    }
+
+    return city.data;
+  } catch (error) {
+    console.log({ error });
+  }
+}
+
+export async function getCityFetch({ q }: City): Promise<WeatherApiData> {
+  const response = await fetch(`${baseURL}&q=${q}`, {
+    headers: {
+      "Content-Type": "application/json",
     },
   });
 
-  if (!city) {
+  if (!response.ok) {
     throw new Error("City not found");
   }
 
-  return city.data;
+  return response.json();
 }
 
 export default instance;

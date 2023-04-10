@@ -21,6 +21,6 @@ export function getStorage<T = unknown>(key: keyof Storage) {
   return chrome.storage.local.get([key]) as Storage<T>;
 }
 
-export function setBadge(text: string) {
-  chrome.action.setBadgeText({ text });
+export function setBadge<T = unknown>(text: T) {
+  chrome.action.setBadgeText({ text: String(text) });
 }

@@ -37,10 +37,6 @@ function App() {
         q: cityName,
       });
 
-      if (!dataCity) {
-        throw new Error("City not found");
-      }
-
       const result = [dataCity];
 
       const store = await setStorage<WeatherApiData[]>({
