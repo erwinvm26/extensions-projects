@@ -19,10 +19,8 @@ export function setStorage<T = unknown>({
 
 export function getStorage<T = unknown>(key: keyof Storage) {
   return chrome.storage.local.get([key]) as Storage<T>;
-  // return chrome.storage.local.get([key]);
 }
 
-async function main() {
-  const res = await getStorage("values");
-  res.values;
+export function setBadge(text: string) {
+  chrome.action.setBadgeText({ text });
 }

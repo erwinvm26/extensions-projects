@@ -48,9 +48,9 @@ function App() {
 
       const result = [...weatherData, city];
 
-      const store = await setStorage<WeatherApiData[]>({ data: result });
+      const store = await setStorage<WeatherApiData>({ data: result });
 
-      setWeatherData(store);
+      setWeatherData(store.data ?? []);
 
       reset({
         search: "",
@@ -71,11 +71,11 @@ function App() {
   const handleDelete = async (index: number) => {
     weatherData.splice(index, 1);
 
-    const store = await setStorage<WeatherApiData[]>({
+    const store = await setStorage<WeatherApiData>({
       data: [...weatherData],
     });
 
-    setWeatherData(store);
+    setWeatherData(store.data ?? []);
   };
 
   return (
