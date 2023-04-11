@@ -1,20 +1,32 @@
 console.log("Server worker started");
-import { setStorage, WeatherApiData, setBadge, getCityFetch } from "../utils";
+import {
+  setStorageChrome,
+  WeatherApiData,
+  setBadgeChrome,
+  getCityFetch,
+  getCity,
+} from "../utils";
 
 chrome.runtime.onInstalled.addListener(async function () {
-  await setStorage({ data: [] });
+  await setStorageChrome({ data: [] });
 });
 
 async function main() {
   try {
     const cityName = "Managua";
+    const a = await getCity({
+      q: cityName,
+    });
+
+    console.log({ a });
+
     const result = await getCityFetch({
       q: cityName,
     });
 
-    setBadge(result.current.feelslike_c);
+    setBadgeChrome(result.current.feelslike_c);
 
-    await setStorage<WeatherApiData[]>({
+    await setStorageChrome<WeatherApiData[]>({
       data: [result],
       values: cityName,
     });

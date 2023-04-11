@@ -11,7 +11,13 @@ import {
 } from "@chakra-ui/react";
 
 import { WeatherCard } from "../../components";
-import { getCity, WeatherApiData, setStorage, getStorage } from "../../utils";
+import {
+  getCity,
+  WeatherApiData,
+  setStorageChrome,
+  getStorageChrome,
+  notificationChrome,
+} from "../../utils";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -44,7 +50,12 @@ function App() {
 
       const result = [...weatherData, city];
 
-      const store = await setStorage<WeatherApiData>({ data: result });
+      const store = await setStorageChrome<WeatherApiData>({ data: result });
+
+      notificationChrome({
+        title: "Weather Notification",
+        message: `Add new city: ${city?.location.name ?? ""}`,
+      });
 
       setWeatherData(store.data ?? []);
 
@@ -57,7 +68,7 @@ function App() {
   };
 
   const getWeatherData = async () => {
-    const result = await getStorage<WeatherApiData>("data");
+    const result = await getStorageChrome<WeatherApiData>("data");
 
     const weatherData = result.data || [];
 
@@ -67,7 +78,7 @@ function App() {
   const handleDelete = async (index: number) => {
     weatherData.splice(index, 1);
 
-    const store = await setStorage<WeatherApiData>({
+    const store = await setStorageChrome<WeatherApiData>({
       data: [...weatherData],
     });
 

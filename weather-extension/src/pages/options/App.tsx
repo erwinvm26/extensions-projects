@@ -10,7 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { setStorage, getStorage, getCity, WeatherApiData } from "@src/utils";
+import {
+  setStorageChrome,
+  getStorageChrome,
+  getCity,
+  WeatherApiData,
+} from "@src/utils";
 
 interface Form {
   cityName: string;
@@ -23,7 +28,7 @@ function App() {
 
   useEffect(() => {
     const funTemp = async () => {
-      const response = await getStorage("values");
+      const response = await getStorageChrome("values");
 
       setValue(response.values ?? "");
     };
@@ -39,7 +44,7 @@ function App() {
 
       const result = [dataCity];
 
-      const store = await setStorage<WeatherApiData[]>({
+      const store = await setStorageChrome<WeatherApiData[]>({
         data: result,
         values: cityName,
       });

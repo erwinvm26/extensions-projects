@@ -1,6 +1,6 @@
 import packageJson from "./package.json";
 
-const icons = {
+export const icons = {
   16: "icons/document_16.png",
   24: "icons/document_24.png",
   32: "icons/document_32.png",

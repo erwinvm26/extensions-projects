@@ -1,9 +1,16 @@
+import document_128 from "../../public/icons/document_128.png";
+
 interface Storage<T = any> {
   data?: T[];
   values?: string;
 }
 
-export function setStorage<T = unknown>({
+interface NotificationChromeProps {
+  title: string;
+  message: string;
+}
+
+export function setStorageChrome<T = unknown>({
   data,
   values,
 }: Storage): Promise<Storage<T>> {
@@ -17,10 +24,26 @@ export function setStorage<T = unknown>({
   });
 }
 
-export function getStorage<T = unknown>(key: keyof Storage) {
+export function getStorageChrome<T = unknown>(key: keyof Storage) {
   return chrome.storage.local.get([key]) as Storage<T>;
 }
 
-export function setBadge<T = unknown>(text: T) {
+export function setBadgeChrome<T = unknown>(text: T) {
   chrome.action.setBadgeText({ text: String(text) });
+}
+
+export function notificationChrome({
+  title,
+  message,
+}: NotificationChromeProps) {
+  chrome.notifications.create(`not-${randomIds()}`, {
+    type: "basic",
+    iconUrl: document_128,
+    title,
+    message,
+  });
+}
+
+function randomIds(ramdonNumber: number = 6) {
+  return Math.random().toString().substring(2, ramdonNumber);
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import config from "@src/config";
 import { WeatherApiData } from "./interfaceq";
+import { url } from "inspector";
 
 interface City {
   q: string;
@@ -23,8 +24,6 @@ export async function getCity({ q }: City) {
       },
     });
 
-    console.log(city);
-
     if (!city) {
       throw new Error("City not found");
     }
@@ -36,7 +35,10 @@ export async function getCity({ q }: City) {
 }
 
 export async function getCityFetch({ q }: City): Promise<WeatherApiData> {
-  const response = await fetch(`${baseURL}&q=${q}`, {
+  const b = new URL(baseURL);
+  b.searchParams.append("q", q);
+
+  const response = await fetch(b, {
     headers: {
       "Content-Type": "application/json",
     },
