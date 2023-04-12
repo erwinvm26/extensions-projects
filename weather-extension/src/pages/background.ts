@@ -4,22 +4,30 @@ import {
   WeatherApiData,
   setBadgeChrome,
   getCityFetch,
-  getCity,
 } from "../utils";
+
+// const filter = {
+//   url: [{ hostSuffix: "reddit.com" }],
+// };
 
 chrome.runtime.onInstalled.addListener(async function () {
   await setStorageChrome({ data: [] });
 });
 
+// chrome.webNavigation.onCompleted.addListener((data) => {
+//   const _url = data.url;
+
+//   if (["reddit.com"].some((el) => _url.includes(el))) {
+//     notificationChrome({
+//       title: "Notification Extension",
+//       message: `${_url}`,
+//     });
+//   }
+// }, filter);
+
 async function main() {
   try {
     const cityName = "Managua";
-    const a = await getCity({
-      q: cityName,
-    });
-
-    console.log({ a });
-
     const result = await getCityFetch({
       q: cityName,
     });

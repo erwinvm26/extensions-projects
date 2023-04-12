@@ -34,5 +34,12 @@ export const manifest: chrome.runtime.ManifestV3 = {
     type: "module",
     service_worker: "js/background.js",
   },
+  content_scripts: [
+    {
+      matches: ["<all_urls>"],
+      js: ["js/index.global.js"],
+      run_at: "document_end",
+    },
+  ],
   permissions: ["notifications", "tabs", "webNavigation", "storage"],
 };
