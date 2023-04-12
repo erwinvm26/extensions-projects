@@ -1,27 +1,31 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 import { WeatherCard } from "@src/components";
 
-// import { WeatherApiData, getStorageChrome } from "../../utils";
+import { WeatherApiData, getStorageChrome } from "../../utils";
 
 function App() {
-  // const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
+  const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
 
-  // useEffect(() => {
-  //   const funWeather = async () => {
-  //     await getWeatherData();
-  //   };
+  useEffect(() => {
+    const funWeather = async () => {
+      await getWeatherData();
+    };
 
-  //   funWeather();
-  // }, []);
+    funWeather();
+  }, []);
 
-  // const getWeatherData = async () => {
-  //   const result = await getStorageChrome<WeatherApiData>("data");
+  const getWeatherData = async () => {
+    const result = await getStorageChrome<WeatherApiData>("data");
 
-  //   const weatherData = result.data || [];
+    const weatherData = result.data || [];
 
-  //   setWeatherData(weatherData);
-  // };
+    setWeatherData(weatherData);
+  };
+
+  if (weatherData.length === 0) {
+    return null;
+  }
 
   return (
     <Box
@@ -34,7 +38,11 @@ function App() {
       borderRadius="md"
       shadow="md"
     >
-      <WeatherCard name="Managua" feelLike={20} isContentScript={true} />
+      <WeatherCard
+        name={weatherData[0].location.name}
+        feelLike={weatherData[0].current.feelslike_c}
+        isContentScript={true}
+      />
     </Box>
   );
 }
