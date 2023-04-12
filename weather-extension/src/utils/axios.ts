@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "@src/config";
-import { WeatherApiData } from "./interfaceq";
+import { WeatherApiData } from "./interface";
 import { url } from "inspector";
 
 interface City {

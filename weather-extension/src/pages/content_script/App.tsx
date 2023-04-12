@@ -6,6 +6,7 @@ import { WeatherApiData, getStorageChrome } from "../../utils";
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
+  const [activeWeather, setActiveWeather] = useState<boolean>(false);
 
   useEffect(() => {
     const funWeather = async () => {
@@ -16,14 +17,19 @@ function App() {
   }, []);
 
   const getWeatherData = async () => {
-    const result = await getStorageChrome<WeatherApiData>("data");
+    const result = await getStorageChrome<WeatherApiData>([
+      "data",
+      "activeWeatherFloting",
+    ]);
 
     const weatherData = result.data || [];
+    const activeWeatherFloting = result.activeWeatherFloting || false;
 
     setWeatherData(weatherData);
+    setActiveWeather(activeWeatherFloting);
   };
 
-  if (weatherData.length === 0) {
+  if (!activeWeather || weatherData.length === 0) {
     return null;
   }
 

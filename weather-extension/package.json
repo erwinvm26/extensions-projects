@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsc && vite build --watch --mode development && yarn build:content",
+    "dev": "tsc && vite build --watch --mode development",
     "dev:firefox": "web-ext run --source-dir ./extension-dist/",
     "build:content": "vite build --watch --config vite.content.config.ts",
     "build": "tsc && vite build --mode production",

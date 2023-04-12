@@ -1,3 +1,3 @@
 export * from "./axios";
-export * from "./interfaceq";
+export * from "./interface";
 export * from "./apiChrome";

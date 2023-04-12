@@ -8,8 +8,10 @@ import {
   Card,
   CardBody,
   Button,
+  Text,
+  IconButton,
 } from "@chakra-ui/react";
-
+import { MdPictureInPicture, MdOutlinePictureInPicture } from "react-icons/md";
 import { WeatherCard } from "../../components";
 import {
   getCity,
@@ -33,6 +35,7 @@ function App() {
     formState: { errors },
   } = useForm<Form>();
   const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
+  const [activePopup, setActivePopup] = useState(false);
 
   useEffect(() => {
     const funWeather = async () => {
@@ -68,11 +71,16 @@ function App() {
   };
 
   const getWeatherData = async () => {
-    const result = await getStorageChrome<WeatherApiData>("data");
+    const result = await getStorageChrome<WeatherApiData>([
+      "data",
+      "activeWeatherFloting",
+    ]);
 
     const weatherData = result.data || [];
+    const activePopup = result.activeWeatherFloting || false;
 
     setWeatherData(weatherData);
+    setActivePopup(activePopup);
   };
 
   const handleDelete = async (index: number) => {
@@ -85,13 +93,41 @@ function App() {
     setWeatherData(store.data ?? []);
   };
 
+  const handlePopup = async (value: boolean) => {
+    const result = await setStorageChrome({
+      activeWeatherFloting: value,
+    });
+
+    setActivePopup(result.activeWeatherFloting || false);
+  };
+
   return (
     <Box padding="5" position="absolute" width="full" backgroundColor="#1e90ff">
       <Card mb="2" shadow="md" maxW="full">
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardBody>
             <FormControl>
-              <FormLabel>Search city</FormLabel>
+              <FormLabel
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text>Search city</Text>
+                <IconButton
+                  variant="ghost"
+                  aria-label="Picture in Picture"
+                  colorScheme="blue"
+                  padding="0"
+                  icon={
+                    activePopup ? (
+                      <MdPictureInPicture size="20px" />
+                    ) : (
+                      <MdOutlinePictureInPicture size="20px" />
+                    )
+                  }
+                  onClick={() => handlePopup(!activePopup)}
+                />
+              </FormLabel>
               <Input
                 type="text"
                 {...register("search", {

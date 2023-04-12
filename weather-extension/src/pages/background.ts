@@ -11,7 +11,7 @@ import {
 // };
 
 chrome.runtime.onInstalled.addListener(async function () {
-  await setStorageChrome({ data: [] });
+  await setStorageChrome({ data: [], activeWeatherFloting: false });
 });
 
 // chrome.webNavigation.onCompleted.addListener((data) => {
@@ -37,6 +37,7 @@ async function main() {
     await setStorageChrome<WeatherApiData[]>({
       data: [result],
       values: cityName,
+      activeWeatherFloting: false,
     });
   } catch (error) {
     console.log(error);
