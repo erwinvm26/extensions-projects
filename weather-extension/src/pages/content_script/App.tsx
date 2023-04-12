@@ -17,6 +17,8 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log({ activeWeather });
+
     chrome.runtime.onMessage.addListener((msg) => {
       if (msg === Message.TOOGLE_OVERLAY) {
         setActiveWeather(!activeWeather);

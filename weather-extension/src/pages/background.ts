@@ -37,7 +37,7 @@ async function main() {
     await setStorageChrome<WeatherApiData[]>({
       data: [result],
       values: cityName,
-      activeWeatherFloting: false,
+      activeWeatherFloting: true,
     });
   } catch (error) {
     console.log(error);

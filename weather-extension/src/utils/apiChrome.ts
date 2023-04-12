@@ -11,6 +11,11 @@ interface NotificationChromeProps {
   message: string;
 }
 
+interface TabsQueryChromeProps {
+  queryInfo?: chrome.tabs.QueryInfo;
+  fn: (result: chrome.tabs.Tab[]) => void;
+}
+
 export function setStorageChrome<T = unknown>({
   data,
   values,
@@ -28,10 +33,6 @@ export function setStorageChrome<T = unknown>({
       });
   });
 }
-
-// export function getStorageChrome<T = unknown>(key: keyof Storage) {
-//   return chrome.storage.local.get([key]) as Storage<T>;
-// }
 
 export function getStorageChrome<T = unknown>(key: (keyof Storage)[]) {
   return chrome.storage.local.get(key) as Storage<T>;
@@ -53,9 +54,10 @@ export function notificationChrome({
   });
 }
 
+export function tabsQueryChrome({ queryInfo, fn }: TabsQueryChromeProps) {
+  chrome.tabs.query(queryInfo || { active: true }, fn);
+}
+
 function randomIds(ramdonNumber: number = 6) {
   return Math.random().toString().substring(2, ramdonNumber);
 }
-
-// \u2103
-// \u2109

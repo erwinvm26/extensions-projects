@@ -20,6 +20,7 @@ import {
   getStorageChrome,
   notificationChrome,
   Message,
+  tabsQueryChrome,
 } from "@src/utils";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -94,18 +95,15 @@ function App() {
     setWeatherData(store.data ?? []);
   };
 
-  const handlePopup = async (value: boolean) => {
-    chrome.tabs.query(
-      {
-        active: true,
-      },
-      (tabs) => {
+  const handlePopup = () => {
+    tabsQueryChrome({
+      fn: (tabs) => {
         if (tabs.length > 0) {
           chrome.tabs.sendMessage(tabs[0].id ?? 0, Message.TOOGLE_OVERLAY);
           setActivePopup(false);
         }
-      }
-    );
+      },
+    });
   };
 
   return (
@@ -132,7 +130,7 @@ function App() {
                       <MdOutlinePictureInPicture size="20px" />
                     )
                   }
-                  onClick={() => handlePopup(!activePopup)}
+                  onClick={() => handlePopup()}
                 />
               </FormLabel>
               <Input
