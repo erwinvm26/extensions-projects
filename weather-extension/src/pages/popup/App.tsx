@@ -12,14 +12,15 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { MdPictureInPicture, MdOutlinePictureInPicture } from "react-icons/md";
-import { WeatherCard } from "../../components";
+import { WeatherCard } from "@src/components";
 import {
   getCity,
   WeatherApiData,
   setStorageChrome,
   getStorageChrome,
   notificationChrome,
-} from "../../utils";
+  Message,
+} from "@src/utils";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -94,11 +95,17 @@ function App() {
   };
 
   const handlePopup = async (value: boolean) => {
-    const result = await setStorageChrome({
-      activeWeatherFloting: value,
-    });
-
-    setActivePopup(result.activeWeatherFloting || false);
+    chrome.tabs.query(
+      {
+        active: true,
+      },
+      (tabs) => {
+        if (tabs.length > 0) {
+          chrome.tabs.sendMessage(tabs[0].id ?? 0, Message.TOOGLE_OVERLAY);
+          setActivePopup(false);
+        }
+      }
+    );
   };
 
   return (

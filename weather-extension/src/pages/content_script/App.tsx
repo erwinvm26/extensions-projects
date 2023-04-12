@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 import { WeatherCard } from "@src/components";
 
-import { WeatherApiData, getStorageChrome } from "../../utils";
+import { Message, WeatherApiData, getStorageChrome } from "../../utils";
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherApiData[]>([]);
@@ -15,6 +15,14 @@ function App() {
 
     funWeather();
   }, []);
+
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener((msg) => {
+      if (msg === Message.TOOGLE_OVERLAY) {
+        setActiveWeather(!activeWeather);
+      }
+    });
+  }, [activeWeather]);
 
   const getWeatherData = async () => {
     const result = await getStorageChrome<WeatherApiData>([
