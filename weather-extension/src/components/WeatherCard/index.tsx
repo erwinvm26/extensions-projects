@@ -13,29 +13,37 @@ import { IoCloseOutline } from "react-icons/io5";
 interface WeatherCardProps {
   name: string;
   feelLike: number;
-  onDelete: MouseEventHandler<HTMLButtonElement>;
+  onDelete?: MouseEventHandler<HTMLButtonElement>;
+  isContentScript?: boolean;
 }
 
-export const WeatherCard = ({ name, feelLike, onDelete }: WeatherCardProps) => {
+export const WeatherCard = ({
+  name,
+  feelLike,
+  onDelete,
+  isContentScript = false,
+}: WeatherCardProps) => {
   return (
-    <Card mb="2" shadow="md" maxW="full">
+    <Card mb={isContentScript ? "0" : "2"} shadow="md" maxW="full">
       <CardBody>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
             <Box>
-              <Heading size="sm">{name}</Heading>
+              <Heading size={isContentScript ? "md" : "sm"}>{name}</Heading>
               <Text>
                 Feel like: <b>{feelLike}</b>
               </Text>
             </Box>
           </Flex>
-          <IconButton
-            variant="ghost"
-            colorScheme="gray"
-            aria-label="See menu"
-            icon={<IoCloseOutline />}
-            onClick={onDelete}
-          />
+          {!isContentScript && (
+            <IconButton
+              variant="ghost"
+              colorScheme="gray"
+              aria-label="See menu"
+              icon={<IoCloseOutline />}
+              onClick={onDelete}
+            />
+          )}
         </Flex>
       </CardBody>
     </Card>

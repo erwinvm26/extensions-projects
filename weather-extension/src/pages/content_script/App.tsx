@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
+import { WeatherCard } from "@src/components";
 
 // import { WeatherApiData, getStorageChrome } from "../../utils";
 
@@ -23,8 +24,17 @@ function App() {
   // };
 
   return (
-    <Box padding="5" width="100px" height="100px" backgroundColor="#1e90ff">
-      Hello
+    <Box
+      padding="2"
+      zIndex={999999}
+      backgroundColor="#1e90ff"
+      position="fixed"
+      top="16"
+      left="16"
+      borderRadius="md"
+      shadow="md"
+    >
+      <WeatherCard name="Managua" feelLike={20} isContentScript={true} />
     </Box>
   );
 }
