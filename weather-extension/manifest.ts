@@ -38,7 +38,7 @@ export const manifest: chrome.runtime.ManifestV3 = {
     {
       matches: ["<all_urls>"],
       js: ["js/index.global.js"],
-      run_at: "cloudy_end",
+      run_at: "document_end",
     },
   ],
   permissions: ["notifications", "tabs", "webNavigation", "storage"],
