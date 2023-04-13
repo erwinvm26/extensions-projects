@@ -32,7 +32,7 @@ src/utils/apiChrome.ts
 
 Aquí encontrarás ciertas acciones que la API nos permite hacer y cabe recalcar que está limitado a este proyecto, por lo que no encontraras todo lo que la API nos ofrece, más solo lo básico.
 
-Como por ejemplo:
+Por ejemplo:
 
 ```
 1. storage
