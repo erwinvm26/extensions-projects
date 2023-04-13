@@ -1,4 +1,4 @@
-import document_128 from "../../public/icons/document_128.png";
+import cloudy_128 from "../../public/icons/cloudy_128.png";
 
 interface Storage<T = any> {
   data?: T[];
@@ -48,7 +48,7 @@ export function notificationChrome({
 }: NotificationChromeProps) {
   chrome.notifications.create(`not-${randomIds()}`, {
     type: "basic",
-    iconUrl: document_128,
+    iconUrl: cloudy_128,
     title,
     message,
   });

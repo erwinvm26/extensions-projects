@@ -1,12 +1,12 @@
 import packageJson from "./package.json";
 
 export const icons = {
-  16: "icons/document_16.png",
-  24: "icons/document_24.png",
-  32: "icons/document_32.png",
-  48: "icons/document_48.png",
-  128: "icons/document_128.png",
-  256: "icons/document_256.png",
+  16: "icons/cloudy_16.png",
+  24: "icons/cloudy_24.png",
+  32: "icons/cloudy_32.png",
+  48: "icons/cloudy_48.png",
+  128: "icons/cloudy_128.png",
+  256: "icons/cloudy_256.png",
 };
 
 export const manifest: chrome.runtime.ManifestV3 = {
@@ -38,7 +38,7 @@ export const manifest: chrome.runtime.ManifestV3 = {
     {
       matches: ["<all_urls>"],
       js: ["js/index.global.js"],
-      run_at: "document_end",
+      run_at: "cloudy_end",
     },
   ],
   permissions: ["notifications", "tabs", "webNavigation", "storage"],
