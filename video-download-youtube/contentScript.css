@@ -1,0 +1,37 @@
+#ytd-download-video {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+
+.ytd-download {
+  align-items: center;
+  background-color: springgreen;
+  border-radius: 20px;
+  border: 1px solid darkblue;
+  color: darkblue;
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 7px;
+  padding: 4px 10px;
+}
+
+.ytd-download:hover {
+  background-color: rgb(8, 126, 67);
+  color: aliceblue;
+}
+
+.ytd-loading {
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "handles",
+  "version": "1.0.0",
+  "description": "For download video",
+  "main": "index.js",
+  "type": "module",
+  "author": "Erwin Vargas",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ytdl-core": "^4.11.4"
+  },
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

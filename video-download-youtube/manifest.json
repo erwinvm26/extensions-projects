@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Downloads from Youtube",
+  "description": "This is my extension",
+  "version": "1.2",
+  "action": {
+    "default_title": "API Test extension",
+    "default_popup": "popup/index.html"
+  },
+  "icons": {
+    "16": "./icons/video-16.png",
+    "48": "./icons/video-48.png",
+    "128": "./icons/video-128.png",
+    "256": "./icons/video-256.png"
+  },
+  "permissions": ["webNavigation", "tabs"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline'"
+  },
+  "background": {
+    "type": "module",
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["download.png", "loading.png"],
+      "matches": ["https://*/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://holamundo.io/"],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": ["./contentScript.js"],
+      "css": ["./contentScript.css"]
+    }
+  ]
+}
