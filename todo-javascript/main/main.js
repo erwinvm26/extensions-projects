@@ -14,9 +14,15 @@ form.addEventListener("submit", async function (e) {
     const _tasks = await getStorage('tasks')
     const _config = await getStorage('config')
 
-    if (inText.value !== '' && (_tasks.tasks.length < _config.config)) {
+    console.log({
+      inText: inText.value,
+      length: _tasks.tasks.length,
+      config: _config?.config ?? 5
+    });
+
+    if (inText.value != '' && (_tasks.tasks.length < (_config?.config ?? 5))) {
       tasks.push(inText.value);
-      setStorage({ tasks })
+      setStorage({ tasks: [..._tasks.tasks, inText.value] })
     }
 
     getListTasks()
@@ -78,11 +84,11 @@ async function getListTasks() {
  * @param {string} key
  */
 async function getStorage(key) {
-  return await chrome.storage.sync.get([key])
+  return await chrome.storage.local.get([key])
 }
 
 function setStorage(value) {
-  chrome.storage.sync.set(value)
+  chrome.storage.local.set(value)
 }
 
 async function main() {

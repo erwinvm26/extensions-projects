@@ -6,14 +6,14 @@ form.addEventListener('submit', function (e) {
 
   const inputs = e.target.elements;
 
-  chrome.storage.sync.set({ config: inputs.taskContraint.value })
+  chrome.storage.local.set({ config: inputs.taskContraint.value })
 })
 
 function main() {
-  const result = chrome.storage.sync.get(['config'])
+  const result = chrome.storage.local.get(['config'])
 
   if (!result.hasOwnProperty('config')) {
-    chrome.storage.sync.set({ config: inputContraint.value })
+    chrome.storage.local.set({ config: inputContraint.value })
   }
 }
 

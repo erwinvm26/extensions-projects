@@ -16,7 +16,6 @@ chrome.runtime.onInstalled.addListener((details) => {
 
   // Desde Aca podemos consumir una API para darle un uso mas extendido a nuestra "App Extension"
   // --> API
-
   chrome.contextMenus.onClicked.addListener(async (event) => {
     // console.log({ selectionText: event.selectionText });
     // chrome.storage.sync.set({ tasks: [...event.selectionText] })
@@ -34,10 +33,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     else if (event.menuItemId === "content-menu-2") {
       chrome.tts.speak(event.selectionText, { 'lang': 'es-ES', 'rate': 1.0 });
     }
-
-
-
-
 
 
 
