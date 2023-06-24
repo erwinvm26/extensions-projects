@@ -21,7 +21,7 @@ export function setStorageChrome<T = unknown>({
   values,
   activeWeatherFloting,
 }: Storage): Promise<Storage<T>> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     chrome.storage.local
       .set({ data, values, activeWeatherFloting })
       .then(() => {

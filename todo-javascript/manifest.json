@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Todo Erwin",
+  "description": "Created a Todo sush as example",
+  "version": "1.0",
+  "icons": {
+    "16": "./icons/timer_16.png",
+    "48": "./icons/timer_48.png",
+    "128": "./icons/timer_128.png",
+    "256": "./icons/timer_256.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "./icons/timer_16.png",
+      "24": "./icons/timer_24.png",
+      "32": "./icons/timer_32.png"
+    },
+    "default_popup": "main/index.html",
+    "default_title": "Todo for Javascript"
+  },
+  "permissions": ["storage", "contextMenus", "search", "tabs", "tts"],
+  "options_page": "options/index.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["https://holamundo.io/*"],
+      "css": ["content_scripts.css"],
+      "js": ["content-script.js"]
+    }
+  ]
+}

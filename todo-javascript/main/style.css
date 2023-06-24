@@ -1,0 +1,29 @@
+* {
+  padding: 5px;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.screen-extension {
+  width: 580px;
+  height: 450px;
+
+  
+  /* border: 1px solid black; */
+}
+
+.list-tasks::-webkit-scrollbar {
+  width: 5px;
+}
+
+.list-tasks::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.list-tasks::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+.list-tasks::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
